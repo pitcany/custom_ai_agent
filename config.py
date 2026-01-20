@@ -15,6 +15,10 @@ class Config:
     SEARCH_PROVIDER = os.getenv("SEARCH_PROVIDER", "duckduckgo")
     TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 
+    ENABLE_MEMORY = os.getenv("ENABLE_MEMORY", "false").lower() == "true"
+    MEMORY_FILE = os.getenv("MEMORY_FILE", ".agent_memory.json")
+    MAX_MEMORY_SIZE = int(os.getenv("MAX_MEMORY_SIZE", "10"))
+
     LANGCHAIN_TRACING = os.getenv("LANGCHAIN_TRACING", "false").lower() == "true"
     LANGCHAIN_API_KEY = os.getenv("LANGCHAIN_API_KEY")
     LANGCHAIN_PROJECT = os.getenv("LANGCHAIN_PROJECT", "starter-agent")

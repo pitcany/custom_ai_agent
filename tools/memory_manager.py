@@ -73,21 +73,24 @@ class ConversationRAGMemory:
 
     def retrieve_relevant_context(self, query: str, k: int = 3) -> str:
         """Retrieve top-k most relevant messages for context."""
-        if self.vectorstore._index is None:
+        try:
+            # Search vector store for relevant documents
+            relevant_docs = self.vectorstore.similarity_search(query, k=k)
+
+            if not relevant_docs:
+                return ""
+
+            # Format as conversation history
+            context_lines = []
+            for doc in relevant_docs:
+                role = doc.metadata.get("role", "")
+                content = doc.page_content
+                context_lines.append(f"{role}: {content}")
+
+            return f"Relevant conversation:\n" + "\n".join(context_lines)
+        except Exception as e:
+            # Handle errors gracefully (e.g., vector store not initialized)
             return ""
-
-        relevant_docs = self.vectorstore.similarity_search(query, k=k)
-
-        if not relevant_docs:
-            return ""
-
-        context_lines = []
-        for doc in relevant_docs:
-            role = doc.metadata.get("role", "")
-            content = doc.page_content
-            context_lines.append(f"{role}: {content}")
-
-        return f"Relevant conversation:\n" + "\n".join(context_lines)
 
     def _enforce_size_limit(self):
         """Keep only most recent max_size messages."""
