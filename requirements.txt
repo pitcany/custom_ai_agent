@@ -1,0 +1,11 @@
+langchain==1.2.6
+langchain-community==0.4.1
+httpx>=0.27.0
+httpx-sse>=0.4.0
+PyJWT>=2.8.0
+python-dotenv>=1.0.0
+duckduckgo-search>=3.0.0
+ddgs>=6.0.0
+# Optional providers (install when needed)
+# tavily-python>=0.3.0            # Install for Tavily
+# google-api-python-client>=2.0.0   # Install for Google
