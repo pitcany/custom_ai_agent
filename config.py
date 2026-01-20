@@ -15,6 +15,13 @@ class Config:
     SEARCH_PROVIDER = os.getenv("SEARCH_PROVIDER", "duckduckgo")
     TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 
+    LANGCHAIN_TRACING = os.getenv("LANGCHAIN_TRACING", "false").lower() == "true"
+    LANGCHAIN_API_KEY = os.getenv("LANGCHAIN_API_KEY")
+    LANGCHAIN_PROJECT = os.getenv("LANGCHAIN_PROJECT", "starter-agent")
+    LANGCHAIN_ENDPOINT = os.getenv(
+        "LANGCHAIN_ENDPOINT", "https://api.smith.langchain.com"
+    )
+
     @classmethod
     def get_search_provider(cls):
         provider_name = cls.SEARCH_PROVIDER.lower()
